@@ -17,7 +17,7 @@ A stunning, cinematic software engineer portfolio inspired by the Netflix interf
 
 ## 🚀 Live Demo
 
-[**Watch Now 🍿**](#) *(Add your GitHub Pages URL here once hosted!)*
+[**Watch Now 🍿**](https://moksh-rastogi.github.io/netflix-portfolio/)
 
 ## 🛠️ Built With
 
