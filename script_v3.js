@@ -316,7 +316,7 @@ document.querySelectorAll('.proj-btn.like').forEach(btn => {
 /* ---------- TYPED EFFECT ON HERO ROLE ---------- */
 const roleEl = document.querySelector('.hero-role');
 if (roleEl) {
-  const roles = ['Software Engineer', 'Full Stack Developer', 'Open Source Contributor', 'Problem Solver'];
+  const roles = ['B.Tech Student', 'Open Source Contributor', 'Problem Solver'];
   let ri = 0, ci = 0, deleting = false;
   function typeRole() {
     const current = roles[ri];
