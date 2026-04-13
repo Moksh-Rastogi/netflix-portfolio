@@ -684,6 +684,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--gray-light);
   letter-spacing: 0.3px;
   transition: color 0.3s ease;
+  text-align: center;
 }
 .skill-card:hover > span { color: var(--white); }
 
