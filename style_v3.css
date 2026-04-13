@@ -827,6 +827,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--gray);
   margin-bottom: 10px;
   flex: 1;
+  min-height: 2.4em;
 }
 .project-tags {
   display: flex;
