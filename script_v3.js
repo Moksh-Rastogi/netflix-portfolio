@@ -120,7 +120,7 @@ const projectData = {
       'Responsive web interface',
     ],
     live: '#',
-    github: '#',
+    github: 'https://github.com/lakshya076/GradLink',
   },
   proj2: {
     title: 'AI Virtual Assistant',
@@ -139,7 +139,7 @@ const projectData = {
       'Email sending, music playback, and jokes on demand',
     ],
     live: '#',
-    github: '#',
+    github: null,
   },
   proj3: {
     title: 'EHR System',
@@ -196,7 +196,13 @@ function openModal(projId) {
   document.getElementById('modalStack').textContent = data.stack;
   document.getElementById('modalDesc').textContent = data.desc;
   document.getElementById('modalLiveLink').href = data.live;
-  document.getElementById('modalGithubLink').href = data.github;
+  const githubLink = document.getElementById('modalGithubLink');
+  if (data.github) {
+    githubLink.href = data.github;
+    githubLink.style.display = '';
+  } else {
+    githubLink.style.display = 'none';
+  }
 
   const thumb = document.getElementById('modalThumb');
   thumb.style.background = data.bg;
@@ -304,10 +310,60 @@ document.querySelectorAll('.proj-btn.add').forEach(btn => {
   });
 });
 
+/* ---------- LIKE BUTTON WITH LOCAL STORAGE ---------- */
+function getLikes() {
+  try { return JSON.parse(localStorage.getItem('projectLikes')) || {}; } catch { return {}; }
+}
+function saveLikes(likes) {
+  localStorage.setItem('projectLikes', JSON.stringify(likes));
+}
+function getLikedState() {
+  try { return JSON.parse(localStorage.getItem('projectLikedState')) || {}; } catch { return {}; }
+}
+function saveLikedState(state) {
+  localStorage.setItem('projectLikedState', JSON.stringify(state));
+}
+
 document.querySelectorAll('.proj-btn.like').forEach(btn => {
+  const card = btn.closest('.project-card');
+  const projId = card.id;
+  const likes = getLikes();
+  const likedState = getLikedState();
+  const count = likes[projId] || 0;
+
+  // Show count next to thumbs up
+  btn.textContent = count > 0 ? `👍 ${count}` : '👍';
+
+  // Restore liked style
+  if (likedState[projId]) {
+    btn.style.borderColor = '#46d369';
+    btn.style.color = '#46d369';
+  }
+
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
-    showToast('👍 Thanks for the love!');
+    const likes = getLikes();
+    const likedState = getLikedState();
+
+    if (likedState[projId]) {
+      // Unlike
+      likes[projId] = Math.max((likes[projId] || 1) - 1, 0);
+      likedState[projId] = false;
+      this.style.borderColor = '';
+      this.style.color = '';
+      showToast('👎 Like removed');
+    } else {
+      // Like
+      likes[projId] = (likes[projId] || 0) + 1;
+      likedState[projId] = true;
+      this.style.borderColor = '#46d369';
+      this.style.color = '#46d369';
+      showToast('👍 Thanks for the love!');
+    }
+
+    saveLikes(likes);
+    saveLikedState(likedState);
+    this.textContent = likes[projId] > 0 ? `👍 ${likes[projId]}` : '👍';
     this.style.transform = 'scale(1.3)';
     setTimeout(() => { this.style.transform = ''; }, 300);
   });
