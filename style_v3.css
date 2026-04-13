@@ -715,6 +715,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease, z-index 0.1s;
+  display: flex;
+  flex-direction: column;
 }
 .project-card:hover {
   transform: scale(1.06);
@@ -811,6 +813,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: var(--dark-2);
   padding: 14px;
   border-top: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .project-name {
   font-size: 0.95rem;
@@ -821,6 +826,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 0.78rem;
   color: var(--gray);
   margin-bottom: 10px;
+  flex: 1;
 }
 .project-tags {
   display: flex;
